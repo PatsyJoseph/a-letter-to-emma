@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Fonts & Styling */
+        body {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .font-sans {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Custom scrollbar to keep the interface clean */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050306;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(244, 63, 94, 0.12);
+            border-radius: 3px;
+            border: 2px solid #050306;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(244, 63, 94, 0.25);
+        }
+
+        /* Background blob animation keyframes */
+        @keyframes float-slow {
+
+            0%,
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -45px) scale(1.08);
+            }
+
+            66% {
+                transform: translate(-25px, 25px) scale(0.96);
+            }
+        }
+
+        @keyframes float-reverse {
+
+            0%,
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(-40px, 40px) scale(0.92);
+            }
+
+            66% {
+                transform: translate(30px, -25px) scale(1.12);
+            }
+        }
+
+        .animate-blob-1 {
+            animation: float-slow 28s infinite ease-in-out;
+        }
+
+        .animate-blob-2 {
+            animation: float-reverse 32s infinite ease-in-out;
+        }
+
+        .animate-blob-3 {
+            animation: float-slow 24s infinite ease-in-out;
+            animation-delay: 2s;
+        }
+
+        /* High-intensity color radial gradients with strong blur */
+        .bg-blob-1 {
+            background: radial-gradient(circle, rgba(244, 63, 94, 0.14) 0%, rgba(244, 63, 94, 0) 70%);
+            filter: blur(150px);
+        }
+
+        .bg-blob-2 {
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0) 70%);
+            filter: blur(170px);
+        }
+
+        .bg-blob-3 {
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(139, 92, 246, 0) 70%);
+            filter: blur(150px);
+        }
+
+        /* Reading Focus & Blur System */
+        .reveal-text {
+            opacity: 0.18;
+            filter: blur(4px);
+            transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1),
+                filter 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+            will-change: opacity, filter;
+        }
+
+        .reveal-text.active-focus {
+            opacity: 1;
+            filter: blur(0px);
+        }
+
+        /* Custom text highlight style */
+        .text-highlight {
+            color: #fff9f8;
+            font-weight: 500;
+            border-bottom: 1px dashed rgba(244, 63, 94, 0.4);
+            text-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
+        }
+
+        /* Floating hearts styling */
+        @keyframes float-heart {
+            0% {
+                transform: translateY(0) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-90px) scale(0.5) rotate(15deg);
+                opacity: 0;
+            }
+        }
+
+        .floating-heart {
+            position: absolute;
+            pointer-events: none;
+            color: rgba(244, 63, 94, 0.85);
+            font-size: 16px;
+            animation: float-heart 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-[#050306] text-stone-100/90 font-serif selection:bg-rose-950/70 selection:text-rose-200 antialiased overflow-x-hidden">
+
+    <!-- Fixed Background Blobs with Ultra-Strong Blur -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-[10%] -left-[10%] w-[60vw] h-[60vw] rounded-full bg-blob-1 animate-blob-1"></div>
+        <div class="absolute -bottom-[10%] -right-[10%] w-[70vw] h-[70vw] rounded-full bg-blob-2 animate-blob-2"></div>
+        <div class="absolute top-[30%] -right-[10%] w-[50vw] h-[50vw] rounded-full bg-blob-3 animate-blob-3"></div>
+    </div>
+
+    <!-- Fixed Header with Glassmorphism and Scroll Progress Bar -->
+    <div
+        class="fixed top-0 left-0 w-full h-14 bg-[#050306]/35 backdrop-blur-xl border-b border-white/[0.03] z-50 flex items-center justify-between px-6">
+        <span class="text-[11px] md:text-xs tracking-[0.18em] uppercase font-sans text-rose-200/50">A New Chapter - June
+            3, 2026</span>
+        <span
+            class="text-[11px] md:text-xs tracking-[0.18em] uppercase font-sans text-rose-200/50 flex items-center gap-1.5">
+            Scroll Down
+            <svg class="w-2.5 h-2.5 animate-bounce text-rose-300/40" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+            </svg>
+        </span>
+        <!-- Scroll Progress Bar Indicator -->
+        <div id="progress-bar"
+            class="absolute bottom-0 left-0 h-[1.5px] bg-gradient-to-r from-rose-500/80 via-pink-400/80 to-amber-400/80 transition-all duration-75"
+            style="width: 0%"></div>
+    </div>
+
+    <!-- Main Content Container with Glassmorphism Card -->
+    <main class="relative z-10 max-w-xl mx-auto px-4 md:px-0 pt-[35vh] pb-[45vh]">
+        <div
+            class="bg-black/25 backdrop-blur-3xl rounded-2xl border border-white/[0.04] shadow-[0_24px_48px_-12px_rgba(0,0,0,0.9)] p-6 md:p-10 space-y-2">
+
+            <header class="reveal-text py-5 space-y-2">
+                <h1
+                    class="text-3xl md:text-4xl font-light tracking-tight bg-gradient-to-r from-rose-200 via-amber-100 to-rose-100 bg-clip-text text-transparent">
+                    To my Emmarie Rose,</h1>
+                <p class="text-[11px] font-sans tracking-[0.2em] text-rose-300/30 uppercase italic">A quiet note of
+                    gratitude and appreciation.</p>
+                <div class="w-8 h-[1px] bg-gradient-to-r from-rose-400 to-transparent mt-3"></div>
+            </header>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                A week ago, I wanted to send you a letter/message for your graduation, but I never got the chance to.
+                Now that I am finally graduating too, I think this is the right moment to say everything I've wanted to
+                tell you.
+            </p>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                First and foremost, I wanted to be your boyfriend for just today. Congratulations my love! You earned
+                this long awaited moment. You deserve everything that you accomplished. I saw the sacrifices, the
+                sleepless nights, the pressure, the setbacks, and all the moments where you chose to keep going when it
+                would've been easier to quit. You worked for this with everything you had, and I couldn't be prouder of
+                you. <span class="text-highlight">I am privileged to be your taga-"Hep hep" when you doubt yourself and
+                    your number 1 antagonist when you need to be motivated.</span>
+            </p>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                Back when we met again at Miagao ComRCY, I was the one encouraging people as a youth leader. It
+                mesmerizes me that somewhere along the way, you became one of the people who inspired me the most. <span
+                    class="text-highlight">Yes, you are my inspiration in achieving this milestone.</span>
+            </p>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                There was the time during college when I lost confidence in myself. That youth leader that you knew and
+                saw during the Miagao ComRCY days faded into oblivion. I questioned my abilities, my direction and I
+                even asked myself if I truly deserve to be at WVSU. <span class="text-highlight">But I saw you move
+                    forward and move on. I saw your discipline, consistency, passion, and willingness to keep on
+                    fighting for your dreams no matter what.</span>
+            </p>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                <span class="text-highlight">Watching, loving, and being with you changed me. Not just academically, but
+                    everything in me as I see my flaws and weaknesses.</span>
+            </p>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                <span class="text-highlight">You reminded me what hard work with passion looks like. You reminded me
+                    that progress is made one step at a time. And because of that, I stood up and I started to fight for
+                    my dreams again. To be a better person and be a man that I dreamt of.</span>
+            </p>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                As I reach my graduation, I want you to know that you played a bigger role in that journey than you
+                probably realize. The confidence that I slowly rebuilt, the goals that I am driven to chase, and the
+                growth that I experienced in college were all influenced, in one way or another, by the example you set.
+            </p>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                <span class="text-highlight">Thank you for inspiring me Love. Thank you for helping me believe in myself
+                    again.</span>
+            </p>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                I know you feel sad and discouraged that you don't have an award. But Love, my graduation, growth and
+                achievements were shaped by your example. <span class="text-highlight">My success I've worked so hard
+                    for is yours too. My Bronze Medals are not mine, it is ours. It's yours, Mama's, and mine.</span>
+            </p>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                I hope life continues to open doors for you. Whatever opportunities come your way, I hope you take them
+                with pride and confidence. Be proud and confident! <span class="text-highlight">The world is better
+                    because of people like you. People who work hard, care deeply, and refuse to give up!</span>
+            </p>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                <span class="text-highlight">Congratulations sa imo Love! and congratulations on everything you've
+                    become. I will always be proud of you!</span>
+            </p>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                And now, as I finally walk to the stage, same as you walked to receive your diploma, I can finally say:
+                <span class="text-highlight">We made it!</span>
+            </p>
+
+            <p class="reveal-text text-base md:text-lg leading-[1.8] text-stone-300/90 font-light py-5">
+                <span class="text-highlight">Thank you for everything Love! I am not here without you. I love
+                    you!</span>
+            </p>
+
+            <footer class="reveal-text py-5 space-y-2">
+                <div class="w-8 h-[1px] bg-gradient-to-r from-rose-400 to-transparent mb-3"></div>
+                <p class="text-[10px] text-rose-300/40 font-sans tracking-[0.2em] uppercase">With love and appreciation,
+                </p>
+                <p class="text-2xl text-rose-100 font-light tracking-wide italic">Pat</p>
+            </footer>
+
+            <!-- Leave a Message Reply Section -->
+            <div class="reveal-text py-5 space-y-4 border-t border-white/[0.04] pt-8 mt-4">
+                <p class="text-xs font-sans tracking-[0.18em] text-rose-300/40 uppercase italic">If you want to leave a
+                    message or something, put it here!</p>
+                <div class="relative group">
+                    <textarea id="emma-message" placeholder="Type a message..." rows="3"
+                        class="w-full bg-white/[0.01] border border-white/[0.06] focus:border-rose-500/40 rounded-xl p-4 text-stone-200 placeholder-stone-700 focus:outline-none focus:ring-1 focus:ring-rose-500/40 transition duration-300 font-serif text-[15px] leading-relaxed resize-none"></textarea>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button id="send-btn"
+                        class="font-sans text-[10px] tracking-[0.2em] uppercase bg-rose-500/10 hover:bg-rose-500/15 text-rose-300/80 border border-rose-500/20 hover:border-rose-500/30 px-5 py-2.5 rounded-lg transition duration-300 active:scale-[0.98]">
+                        Save & Copy Message
+                    </button>
+                    <span id="form-status"
+                        class="text-xs font-sans text-rose-400/60 italic opacity-0 transition-opacity duration-300">Message
+                        saved & copied! ❤️</span>
+                </div>
+
+                <!-- Emma's Notes Drawer -->
+                <div id="saved-messages-container" class="space-y-3 mt-4 hidden">
+                    <p class="text-[10px] font-sans tracking-widest uppercase text-rose-300/30">Emma's Notes:</p>
+                    <div id="saved-messages-list" class="space-y-2"></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const paragraphs = document.querySelectorAll('.reveal-text');
+            let tick = false;
+
+            const updateFocus = () => {
+                const viewportHeight = window.innerHeight;
+                const focusPoint = viewportHeight * 0.45;
+
+                let closestParagraph = null;
+                let minDistance = Infinity;
+
+                paragraphs.forEach((p) => {
+                    const rect = p.getBoundingClientRect();
+                    const paragraphCenter = rect.top + rect.height / 2;
+                    const distanceToFocus = Math.abs(paragraphCenter - focusPoint);
+
+                    if (distanceToFocus < minDistance) {
+                        minDistance = distanceToFocus;
+                        closestParagraph = p;
+                    }
+                });
+
+                paragraphs.forEach((p) => {
+                    if (p === closestParagraph) {
+                        p.classList.add('active-focus');
+                    } else {
+                        p.classList.remove('active-focus');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', () => {
+                if (!tick) {
+                    window.requestAnimationFrame(() => {
+                        updateFocus();
+                        const scrollTop = window.scrollY;
+                        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                        document.getElementById('progress-bar').style.width = scrollPercent + '%';
+                        tick = false;
+                    });
+                    tick = true;
+                }
+            });
+
+            updateFocus();
+
+            // Message box interactions
+            const sendBtn = document.getElementById('send-btn');
+            const emmaMessage = document.getElementById('emma-message');
+            const formStatus = document.getElementById('form-status');
+            const savedContainer = document.getElementById('saved-messages-container');
+            const savedList = document.getElementById('saved-messages-list');
+
+            const loadMessages = () => {
+                const messages = JSON.parse(localStorage.getItem('emma_messages') || '[]');
+                if (messages.length > 0) {
+                    savedContainer.classList.remove('hidden');
+                    savedList.innerHTML = messages.map(msg => `
+                        <div class="bg-white/[0.01] border border-white/[0.04] p-3 rounded-lg text-sm text-stone-300 font-serif leading-relaxed relative">
+                            <p>${msg}</p>
+                        </div>
+                    `).join('');
+                }
+            };
+
+            sendBtn.addEventListener('click', () => {
+                const text = emmaMessage.value.trim();
+                if (!text) return;
+
+                // --- SILENT EMAIL FORWARDING (WEB3FORMS) ---
+                // This happens entirely in the background. No page refresh or redirects.
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        access_key: 'YOUR_ACCESS_KEY_HERE', // Put your free Web3Forms key here
+                        subject: 'New Note From Emma Rose',
+                        from_name: 'Graduation Site Portfolio',
+                        message: text
+                    })
+                })
+                    .then(response => console.log("Delivered safely."))
+                    .catch(error => console.error("Error sending message:", error));
+                // --------------------------------------------
+
+                // Save to localStorage (Local illusion)
+                const messages = JSON.parse(localStorage.getItem('emma_messages') || '[]');
+                messages.push(text);
+                localStorage.setItem('emma_messages', JSON.stringify(messages));
+
+                // Copy to clipboard (Local illusion)
+                navigator.clipboard.writeText(text).then(() => {
+                    formStatus.classList.remove('opacity-0');
+                    setTimeout(() => formStatus.classList.add('opacity-0'), 3000);
+                });
+
+                emmaMessage.value = '';
+                loadMessages();
+
+                // Spawn floating hearts
+                const btnRect = sendBtn.getBoundingClientRect();
+                for (let i = 0; i < 6; i++) {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤️';
+                    heart.className = 'floating-heart';
+                    heart.style.left = `${btnRect.left + btnRect.width / 2 + (Math.random() - 0.5) * 50 + window.scrollX}px`;
+                    heart.style.top = `${btnRect.top + window.scrollY - 15}px`;
+                    heart.style.animationDelay = `${Math.random() * 0.25}s`;
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 1300);
+                }
+            });
+
+            loadMessages();
+        });
+    </script>
+</body>
+
+</html>
