@@ -9,10 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=0,300;0,400;0,500;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght=300;400;500;600&display=swap"
         rel="stylesheet">
     <style>
-        /* Custom Fonts & Styling */
         body {
             font-family: 'Cormorant Garamond', serif;
         }
@@ -21,7 +20,6 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        /* Custom scrollbar to keep the interface clean */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -40,7 +38,6 @@
             background: rgba(244, 63, 94, 0.25);
         }
 
-        /* Background blob animation keyframes */
         @keyframes float-slow {
 
             0%,
@@ -86,7 +83,6 @@
             animation-delay: 2s;
         }
 
-        /* High-intensity color radial gradients with strong blur */
         .bg-blob-1 {
             background: radial-gradient(circle, rgba(244, 63, 94, 0.14) 0%, rgba(244, 63, 94, 0) 70%);
             filter: blur(150px);
@@ -102,12 +98,10 @@
             filter: blur(150px);
         }
 
-        /* Reading Focus & Blur System */
         .reveal-text {
             opacity: 0.18;
             filter: blur(4px);
-            transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1),
-                filter 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+            transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1), filter 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
             will-change: opacity, filter;
         }
 
@@ -116,7 +110,6 @@
             filter: blur(0px);
         }
 
-        /* Custom text highlight style */
         .text-highlight {
             color: #fff9f8;
             font-weight: 500;
@@ -124,7 +117,6 @@
             text-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
         }
 
-        /* Floating hearts styling */
         @keyframes float-heart {
             0% {
                 transform: translateY(0) scale(1) rotate(0deg);
@@ -151,14 +143,32 @@
 <body
     class="bg-[#050306] text-stone-100/90 font-serif selection:bg-rose-950/70 selection:text-rose-200 antialiased overflow-x-hidden">
 
-    <!-- Fixed Background Blobs with Ultra-Strong Blur -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div class="absolute -top-[10%] -left-[10%] w-[60vw] h-[60vw] rounded-full bg-blob-1 animate-blob-1"></div>
         <div class="absolute -bottom-[10%] -right-[10%] w-[70vw] h-[70vw] rounded-full bg-blob-2 animate-blob-2"></div>
         <div class="absolute top-[30%] -right-[10%] w-[50vw] h-[50vw] rounded-full bg-blob-3 animate-blob-3"></div>
     </div>
 
-    <!-- Fixed Header with Glassmorphism and Scroll Progress Bar -->
+    <!-- Custom Witty Exit Intent Popup Modal -->
+    <div id="exit-modal"
+        class="fixed top-0 left-0 w-screen h-screen z-[9999] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div
+            class="bg-[#0b080d] border border-rose-500/20 p-6 md:p-8 rounded-2xl max-w-sm w-full text-center space-y-4 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.9)] transform translate-y-0">
+            <div class="text-3xl">🥺</div>
+            <h3 class="text-xl font-light text-rose-200">Wait, Emma Rose!</h3>
+            <p class="text-sm text-stone-400 font-sans leading-relaxed">
+                You haven't written anything in the response box down below yet. Are you really trying to run away
+                without saying anything to Pat? ❤️
+            </p>
+            <div class="pt-2">
+                <button id="close-modal-btn"
+                    class="w-full font-sans text-[10px] tracking-widest uppercase bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 border border-rose-500/40 py-3 rounded-xl transition duration-200">
+                    Okay fine, I'll write something
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div
         class="fixed top-0 left-0 w-full h-14 bg-[#050306]/35 backdrop-blur-xl border-b border-white/[0.03] z-50 flex items-center justify-between px-6">
         <span class="text-[11px] md:text-xs tracking-[0.18em] uppercase font-sans text-rose-200/50">A New Chapter - June
@@ -172,13 +182,11 @@
                 </path>
             </svg>
         </span>
-        <!-- Scroll Progress Bar Indicator -->
         <div id="progress-bar"
             class="absolute bottom-0 left-0 h-[1.5px] bg-gradient-to-r from-rose-500/80 via-pink-400/80 to-amber-400/80 transition-all duration-75"
             style="width: 0%"></div>
     </div>
 
-    <!-- Main Content Container with Glassmorphism Card -->
     <main class="relative z-10 max-w-xl mx-auto px-4 md:px-0 pt-[35vh] pb-[45vh]">
         <div
             class="bg-black/25 backdrop-blur-3xl rounded-2xl border border-white/[0.04] shadow-[0_24px_48px_-12px_rgba(0,0,0,0.9)] p-6 md:p-10 space-y-2">
@@ -277,27 +285,39 @@
                 <p class="text-2xl text-rose-100 font-light tracking-wide italic">Pat</p>
             </footer>
 
-            <!-- Leave a Message Reply Section -->
-            <div class="reveal-text py-5 space-y-4 border-t border-white/[0.04] pt-8 mt-4">
-                <p class="text-xs font-sans tracking-[0.18em] text-rose-300/40 uppercase italic">If you want to leave a
-                    message or something, put it here!</p>
+            <div id="reply-section" class="reveal-text py-5 space-y-4 border-t border-white/[0.04] pt-8 mt-4">
+                <div class="flex items-center justify-between">
+                    <p class="text-xs font-sans tracking-[0.18em] text-rose-300/40 uppercase italic">Leave a note or
+                        send a response</p>
+
+                    <div class="flex items-center bg-white/[0.02] border border-white/[0.06] p-0.5 rounded-full relative w-44 h-8 cursor-pointer font-sans text-[10px] tracking-wider uppercase select-none"
+                        id="mode-toggle">
+                        <div id="toggle-slider"
+                            class="absolute top-0.5 left-0.5 bottom-0.5 w-[86px] bg-rose-500/10 border border-rose-500/20 rounded-full transition-all duration-300 ease-out">
+                        </div>
+                        <div class="w-1/2 text-center z-10 text-rose-300 transition-colors duration-300 font-medium"
+                            id="mode-send">Send to Pat</div>
+                        <div class="w-1/2 text-center z-10 text-stone-600 transition-colors duration-300"
+                            id="mode-private">Just a Note</div>
+                    </div>
+                </div>
+
                 <div class="relative group">
-                    <textarea id="emma-message" placeholder="Type a message..." rows="3"
+                    <textarea id="emma-message" placeholder="Write your response here..." rows="3"
                         class="w-full bg-white/[0.01] border border-white/[0.06] focus:border-rose-500/40 rounded-xl p-4 text-stone-200 placeholder-stone-700 focus:outline-none focus:ring-1 focus:ring-rose-500/40 transition duration-300 font-serif text-[15px] leading-relaxed resize-none"></textarea>
                 </div>
                 <div class="flex items-center justify-between">
                     <button id="send-btn"
                         class="font-sans text-[10px] tracking-[0.2em] uppercase bg-rose-500/10 hover:bg-rose-500/15 text-rose-300/80 border border-rose-500/20 hover:border-rose-500/30 px-5 py-2.5 rounded-lg transition duration-300 active:scale-[0.98]">
-                        Save & Copy Message
+                        Send Message
                     </button>
                     <span id="form-status"
-                        class="text-xs font-sans text-rose-400/60 italic opacity-0 transition-opacity duration-300">Message
-                        saved & copied! ❤️</span>
+                        class="text-xs font-sans text-rose-400/60 italic opacity-0 transition-opacity duration-300">Sent
+                        safely ❤️</span>
                 </div>
 
-                <!-- Emma's Notes Drawer -->
                 <div id="saved-messages-container" class="space-y-3 mt-4 hidden">
-                    <p class="text-[10px] font-sans tracking-widest uppercase text-rose-300/30">Emma's Notes:</p>
+                    <p class="text-[10px] font-sans tracking-widest uppercase text-rose-300/30">Your Local Log:</p>
                     <div id="saved-messages-list" class="space-y-2"></div>
                 </div>
             </div>
@@ -353,12 +373,57 @@
 
             updateFocus();
 
-            // Message box interactions
+            // Form/Toggle Elements
+            const modeToggle = document.getElementById('mode-toggle');
+            const toggleSlider = document.getElementById('toggle-slider');
+            const modeSend = document.getElementById('mode-send');
+            const modePrivate = document.getElementById('mode-private');
+
             const sendBtn = document.getElementById('send-btn');
             const emmaMessage = document.getElementById('emma-message');
             const formStatus = document.getElementById('form-status');
             const savedContainer = document.getElementById('saved-messages-container');
             const savedList = document.getElementById('saved-messages-list');
+
+            // Exit Intent Modal Elements
+            const exitModal = document.getElementById('exit-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            let currentMode = 'send';
+            let contentSubmitted = false;
+            let modalShown = false;
+
+            modeToggle.addEventListener('click', () => {
+                if (currentMode === 'send') {
+                    currentMode = 'private';
+                    toggleSlider.style.transform = 'translateX(84px)';
+                    modePrivate.classList.replace('text-stone-600', 'text-rose-300');
+                    modeSend.classList.replace('text-rose-300', 'text-stone-600');
+                    sendBtn.innerText = 'Save Local Note';
+                } else {
+                    currentMode = 'send';
+                    toggleSlider.style.transform = 'translateX(0px)';
+                    modeSend.classList.replace('text-stone-600', 'text-rose-300');
+                    modePrivate.classList.replace('text-rose-300', 'text-stone-600');
+                    sendBtn.innerText = 'Send Message';
+                }
+            });
+
+            // --- CUSTOM INTERACTIVE EXIT INTENT LOGIC ---
+            // Triggers instantly if her cursor leaves the top window area (trying to close tab/app)
+            document.addEventListener('mouseleave', (event) => {
+                if (event.clientY < 20 && !contentSubmitted && !modalShown) {
+                    modalShown = true;
+                    exitModal.classList.remove('opacity-0', 'pointer-events-none');
+                }
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                exitModal.classList.add('opacity-0', 'pointer-events-none');
+                // Smoothly auto-scroll her right to the input field so she doesn't have to find it
+                document.getElementById('reply-section').scrollIntoView({ behavior: 'smooth' });
+                emmaMessage.focus();
+            });
 
             const loadMessages = () => {
                 const messages = JSON.parse(localStorage.getItem('emma_messages') || '[]');
@@ -374,42 +439,45 @@
 
             sendBtn.addEventListener('click', () => {
                 const text = emmaMessage.value.trim();
-                if (!text) return;
+                if (!text) {
+                    alert("Write a little something first! I want to read what you think. ❤️");
+                    return;
+                }
 
-                // --- SILENT EMAIL FORWARDING (WEB3FORMS) ---
-                // This happens entirely in the background. No page refresh or redirects.
-                fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        access_key: 'YOUR_ACCESS_KEY_HERE', // Put your free Web3Forms key here
-                        subject: 'New Note From Emma Rose',
-                        from_name: 'Graduation Site Portfolio',
-                        message: text
+                contentSubmitted = true; // Modal won't trigger anymore once she sends a response
+
+                if (currentMode === 'send') {
+                    fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            access_key: 'b84a6a39-1703-40d1-ba8a-fea3751e7c8d',
+                            subject: 'Direct Response from Emma Rose',
+                            from_name: 'Graduation Letter System',
+                            message: text
+                        })
                     })
-                })
-                    .then(response => console.log("Delivered safely."))
-                    .catch(error => console.error("Error sending message:", error));
-                // --------------------------------------------
+                        .then(response => console.log("Delivered successfully."))
+                        .catch(error => console.error("Transmission error:", error));
 
-                // Save to localStorage (Local illusion)
+                    formStatus.innerText = "Sent safely to Pat! ❤️";
+                } else {
+                    formStatus.innerText = "Saved to your device local log! 📝";
+                }
+
                 const messages = JSON.parse(localStorage.getItem('emma_messages') || '[]');
-                messages.push(text);
+                messages.push(`${currentMode === 'send' ? '[Sent to Pat] ' : '[Private Note] '} ${text}`);
                 localStorage.setItem('emma_messages', JSON.stringify(messages));
 
-                // Copy to clipboard (Local illusion)
-                navigator.clipboard.writeText(text).then(() => {
-                    formStatus.classList.remove('opacity-0');
-                    setTimeout(() => formStatus.classList.add('opacity-0'), 3000);
-                });
+                formStatus.classList.remove('opacity-0');
+                setTimeout(() => formStatus.classList.add('opacity-0'), 4000);
 
                 emmaMessage.value = '';
                 loadMessages();
 
-                // Spawn floating hearts
                 const btnRect = sendBtn.getBoundingClientRect();
                 for (let i = 0; i < 6; i++) {
                     const heart = document.createElement('div');
@@ -429,3 +497,5 @@
 </body>
 
 </html>
+
+```
